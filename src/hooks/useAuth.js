@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 
 export const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const token = window.localStorage.getItem("token");
-
-  const checkAuth = () => {
-    token ? setIsAuthenticated(true) : setIsAuthenticated(false);
-  };
+  const [isAuthenticated, setIsAuthenticated] = useState(!!token);
 
   useEffect(() => {
-    checkAuth();
+    setIsAuthenticated(!!token);
   }, [token]);
 
   return isAuthenticated;
