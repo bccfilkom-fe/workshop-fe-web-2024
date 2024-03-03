@@ -4,7 +4,7 @@ import SignupForm from "../components/auth/SignupForm";
 const SignupPage = () => {
   return (
     <MainLayout>
-      <main className=" flex flex-col items-center w-screen">
+      <main className=" flex flex-col items-center w-full md:w-screen">
         <SignupForm />
       </main>
     </MainLayout>

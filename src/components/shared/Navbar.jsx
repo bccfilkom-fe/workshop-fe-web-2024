@@ -2,9 +2,16 @@ import React from "react";
 import { BsTwitter } from "react-icons/bs";
 import Button from "../ui/Button";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const isAuthenticated = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   return (
     <nav className="fixed top-0 left-0 z-20 w-full flex justify-center items-center p-4 bg-white shadow-md">
@@ -20,17 +27,26 @@ const Navbar = () => {
           <Button
             type={"button"}
             variation={"primary"}
-            onClick={() => console.log("klik")}
+            onClick={() => navigate("/")}
           >
             Home
           </Button>
-          {isAuthenticated && (
+
+          {isAuthenticated ? (
             <Button
               type={"button"}
               variation={"secondary"}
-              onClick={() => console.log("klik")}
+              onClick={() => handleLogout()}
             >
               Log Out
+            </Button>
+          ) : (
+            <Button
+              type={"button"}
+              variation={"secondary"}
+              onClick={() => navigate("/login")}
+            >
+              Log In
             </Button>
           )}
         </div>
